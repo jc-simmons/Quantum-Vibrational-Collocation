@@ -1,0 +1,39 @@
+&system
+    ndim = 12
+    keo_terms = 12
+/
+
+&indices
+    basis_limits = 8,8,8,8,8,8,8,8,8,8,8,8
+    grid_limits = 10,10,10,10,10,10,10,10
+    10,10,10,10
+/
+
+&basis_config
+    omega = 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0
+/
+
+&potential_config
+    potential_routine = 'SOP'
+    potential_source = 'potentials/12D_bilinear_oscillator.dat'
+    potential_terms = 23
+/
+
+!dynamic for testing different grids per dimension
+&grid_config
+    grid_id = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    grid_routine(1) = 'LOAD'
+    grid_source(1) = 'src/hobleja.dat'
+/
+
+&output_config
+    print_output = .true.
+    save_output  = .true.
+    output_dir   = 'results/'
+    run_name  = 'sample_run'
+/
+!keep a blank EOF line here for read parser
+ 
+ 
+
