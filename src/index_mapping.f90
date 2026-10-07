@@ -63,7 +63,8 @@ mapping_type, ndim)
 ! internally and is sized to the current set of indices.
 !
 ! same_space indicates that the input and output index spaces are the
-! same, in which case no new index set is generated after grouping.
+! same, in which case no new index set may need to be generated, though
+! is not fully implemented 
 !
 ! input_max and output_max define the bounds used when generating
 ! indices for the input and output spaces, respectively.
