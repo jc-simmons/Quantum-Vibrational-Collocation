@@ -59,8 +59,7 @@ contains
 
 
     !===============================================================
-    ! Construct all matrix-derived quantities required by the
-    ! calculation.
+    ! Construct all required collocation, LU, & inverse matrices:
     !
     ! B and KEO-applied matrices are constructed internally, then
     ! factorized into L and U and stored in Bz.
@@ -138,10 +137,6 @@ contains
             allocate(L(ni,ni))
             allocate(U(ni,ni))
 
-            !-------------------------------------------------------
-            ! Basis matrix for this dimension
-            !-------------------------------------------------------
-
             call construct_basis_matrix( &
                 grid(1:ni,dim), basis, dim, B)
 
@@ -150,16 +145,8 @@ contains
             Bz(1,1,dim,1,1:ni,1:ni) = L
             Bz(1,2,dim,1,1:ni,1:ni) = U
 
-            !-------------------------------------------------------
-            ! Inverses of L and U for the ordinary basis matrix
-            !-------------------------------------------------------
-
             Binv(dim,1,1:ni,1:ni) = inverse(L)
             Binv(dim,2,1:ni,1:ni) = inverse(U)
-
-            !-------------------------------------------------------
-            ! KEO terms for this dimension
-            !-------------------------------------------------------
 
             do nterm = 1, kterms
 
@@ -266,7 +253,6 @@ contains
     !
     ! A = L * U
     !
-    ! This is the existing no-pivot algorithm.
     !===============================================================
     subroutine lu_nopivot(A, L, U)
 
